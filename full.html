@@ -1,0 +1,96 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <title>full-screen</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.52.0/dist/phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+
+<script type="text/javascript">
+
+// var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
+
+var config = {
+        type: Phaser.AUTO,
+        width: 320,
+        height: 241,
+        scene: {
+            preload: preload,
+            create: create,
+            update: update,
+            render:render
+        }
+    };
+
+var game = new Phaser.Game(config);
+
+function preload() {
+
+   this.load.image('dragon', 'assets/cougar_dragonsun.png');
+    this.load.image('star', 'assets/monika_krawinkel-amberstar_title.png');
+    this.load.image('nanoha', 'assets/nanoha_taiken_pink.png');
+}
+
+function create() {
+
+    // game.add.image(0, 0, 'star');
+
+    var i = this.add.image(game.world.centerX, game.world.centerY, 'nanoha');
+    i.anchor.set(0.5);
+
+    // var sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'dragon');
+    // sprite.anchor.set(0.5);
+
+    this.stage.backgroundColor = '#4d4d4d';
+
+    // Stretch to fill
+    this.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+
+    // Keep original size
+    // game.scale.fullScreenScaleMode = Phaser.ScaleManager.NO_SCALE;
+
+    // Maintain aspect ratio
+    // game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+
+    this.input.onDown.add(gofull, this);
+
+}
+
+function gofull() {
+
+    if (this.scale.isFullScreen)
+    {
+        this.scale.stopFullScreen();
+    }
+    else
+    {
+        this.scale.startFullScreen(false);
+    }
+
+}
+
+function update() {
+
+}
+
+function render () {
+
+    // game.debug.text('Click / Tap to go fullscreen', 270, 16);
+    // game.debug.text('Click / Tap to go fullscreen', 0, 16);
+
+    this.debug.inputInfo(32, 32);
+    // game.debug.pointer(game.input.activePointer);
+
+}
+
+</script>
+
+</body>
+</html>
